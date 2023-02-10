@@ -80,8 +80,11 @@ public class ToDoListModel
             conStatement = con.createStatement();
             
             String formattedDate = (new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+            String formattedTaskName = taskName.replace("'", "''");
+            String formattedTaskNotes = taskNotes.replace("'", "''");
 
-            conStatement.execute("insert into " + dbTableName + " values(0, '" + taskName + "', '" + taskNotes + "', '" + formattedDate + "')");
+            String SQL = "insert into " + dbTableName + " values(0, '" + formattedTaskName + "', '" + formattedTaskNotes + "', '" + formattedDate + "')";
+            conStatement.execute(SQL);
             tbModel.addRow(new Object[] { Boolean.FALSE, taskName, taskNotes, formattedDate });
             
             con.close();
